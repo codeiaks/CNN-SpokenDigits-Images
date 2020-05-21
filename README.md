@@ -2,4 +2,4 @@
 MelSpectrogram Classifications of Spoken Digits
 
 ![GitHub Logo](latest_result_cnn.png)
-Format: ![Alt Text](url)
+This is the latest results of the classification task 
