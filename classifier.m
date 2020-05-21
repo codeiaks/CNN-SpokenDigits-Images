@@ -30,28 +30,55 @@ numTrainFiles = floor(min(labelCount.Count) * 0.7);
 
 %% Creating the Network Architecture
 layers = [
+    % Layer 1 - Image Input
     imageInputLayer([227 227 3])
-    
-    convolution2dLayer(3,8,'Padding','same')
-    batchNormalizationLayer
+    % Layer 2 - 2D Convolutional
+    convolution2dLayer(11, 96, 'Stride', 4, 'Padding', 0)
+    % Layer 3 - ReLU
     reluLayer
-    
-    maxPooling2dLayer(2,'Stride',2)
-    
-    convolution2dLayer(3,16,'Padding','same')
+    % Layer 4 - Batch Normalization
     batchNormalizationLayer
+    % Layer 5 - 2D Max Pooling
+    maxPooling2dLayer(3, 'Stride', 2)
+    % Layer 6 - Grouped 2D Convolutional
+    groupedConvolution2dLayer(5, 128, 2, 'Stride', 1, 'Padding', 2)
+    % Layer 7 - ReLU
     reluLayer
-    
-    maxPooling2dLayer(2,'Stride',2)
-    
-    convolution2dLayer(3,32,'Padding','same')
+    % Layer 8 - Batch Normalization
     batchNormalizationLayer
+    % Layer 9 - 2D Max Pooling
+    maxPooling2dLayer(3, 'Stride', 2)
+    % Layer 10 - 2D Convolutional
+    convolution2dLayer(3, 384, 'Stride', 1, 'Padding', 1)
+    % Layer 11 - ReLU
     reluLayer
-    
-    dropoutLayer
-    
+    % Layer 12 - Grouped 2D Convolutional
+    groupedConvolution2dLayer(3, 192, 2, 'Stride', 1, 'Padding', 1)
+    % Layer 13 - ReLU
+    reluLayer
+    % Layer 14 - Grouped 2D Convolutional
+    groupedConvolution2dLayer(3, 128, 2, 'Stride', 1, 'Padding', 1)
+    % Layer 15 - ReLU
+    reluLayer
+    % Layer 16 - 2D Max Pooling
+    maxPooling2dLayer(3, 'Stride', 2)
+    % Layer 17 - Fully Connected Layer
+    fullyConnectedLayer(4096)
+    % Layer 18 - ReLU
+    reluLayer
+    % Layer 19 - Probability Dropout
+    dropoutLayer(0.5)
+    % Layer 20 - Fully Connected Layer
+    fullyConnectedLayer(4096)
+    % Layer 21 - ReLU
+    reluLayer
+    % Layer 22 - Probability Dropout
+    dropoutLayer(0.5)
+    % Layer 23 - Fully Connected Layer
     fullyConnectedLayer(10)
+    % Layer 24 - SoftMax 
     softmaxLayer
+    % Layer 25 - Classification
     classificationLayer];
 
 %% Training Options
