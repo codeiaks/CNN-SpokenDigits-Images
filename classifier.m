@@ -2,18 +2,20 @@
 clear
 clc
 
+% The MelSpecs folder contains 10 subfolders - zero to nine - 
+% altogether it has 23636 melspecs of the spoken digits
 dataPath = '/MelSpecs';
 
 % Create an image datastore
 imds = imageDatastore(dataPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 %% Display a few of them
-% figure;
-% perm = randperm(260, 20);
-% for i = 1:20
-%     subplot(4,5,i);
-%     imshow(imds.Files{perm(i)});
-% end
+figure;
+perm = randperm(23636, 20);
+for i = 1:20
+    subplot(4,5,i);
+    imshow(imds.Files{perm(i)});
+end
 
 %% Label Counting
 labelCount = countEachLabel(imds);
