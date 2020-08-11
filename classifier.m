@@ -10,12 +10,12 @@ dataPath = '/home/analysis/Documents/sylvainDatasets/CNN-SpokenDigits-Images/Mel
 imds = imageDatastore(dataPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 %% Display a few of them
-figure;
-perm = randperm(23636, 20);
-for i = 1:20
-    subplot(4,5,i);
-    imshow(imds.Files{perm(i)});
-end
+% figure;
+% perm = randperm(23636, 20);
+% for i = 1:20
+%     subplot(4,5,i);
+%     imshow(imds.Files{perm(i)});
+% end
 
 %% Label Counting
 labelCount = countEachLabel(imds);
